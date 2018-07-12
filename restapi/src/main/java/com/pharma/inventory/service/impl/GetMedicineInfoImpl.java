@@ -1,4 +1,4 @@
-package com.pharma.inventory.service;
+package com.pharma.inventory.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.pharma.inventory.dao.ProductDAO;
 import com.pharma.inventory.model.Product;
+import com.pharma.inventory.service.GetMedicineInfo;
 
 @Path("/medicineInfo") 
 @Consumes(MediaType.APPLICATION_JSON) 
