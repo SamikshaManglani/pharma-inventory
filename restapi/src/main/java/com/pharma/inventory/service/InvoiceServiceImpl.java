@@ -1,0 +1,38 @@
+package com.pharma.inventory.service;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.pharma.inventory.dao.InvoiceDAO;
+import com.pharma.inventory.model.Invoice;
+import com.pharma.inventory.model.Response;
+
+
+@Path("/invoice") 
+@Consumes(MediaType.APPLICATION_JSON) 
+@Produces(MediaType.APPLICATION_JSON)
+public class InvoiceServiceImpl implements InvoiceService {
+
+	@GET
+	@Path("/{id}")
+	public Response getInvoice(@PathParam("id") int id) {
+		Response response = new Response();
+		response.setStatus(true);
+		response.setMessage("Sunil is Awesome");
+		return response;
+	}
+
+	@POST
+	public Response setInvoice(Invoice invoice){
+		int k = InvoiceDAO.register(invoice);
+		Response response = new Response();
+		response.setStatus(true);
+		response.setMessage("Post works!!" + k);
+		return response;
+	}
+}
