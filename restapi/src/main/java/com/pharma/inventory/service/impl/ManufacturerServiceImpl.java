@@ -1,4 +1,4 @@
-package com.pharma.inventory.service;
+package com.pharma.inventory.service.impl;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import com.pharma.inventory.dao.ManufacturerDAO;
 import com.pharma.inventory.model.Manufacturer;
 import com.pharma.inventory.model.Response;
+import com.pharma.inventory.service.ManufacturerService;
 
 @Path("/manufacturer") 
 @Consumes(MediaType.APPLICATION_JSON) 

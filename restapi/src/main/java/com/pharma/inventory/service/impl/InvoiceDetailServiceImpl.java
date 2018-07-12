@@ -1,7 +1,8 @@
-package com.pharma.inventory.service;
+package com.pharma.inventory.service.impl;
 
 import com.pharma.inventory.model.InvoiceDetail;
 import com.pharma.inventory.model.Response;
+import com.pharma.inventory.service.InvoiceDetailService;
 
 public class InvoiceDetailServiceImpl implements InvoiceDetailService {
 

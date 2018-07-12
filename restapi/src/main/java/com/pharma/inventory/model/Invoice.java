@@ -1,12 +1,18 @@
 package com.pharma.inventory.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Cascade;
 
 @XmlRootElement (name="invoice")
 @Entity
@@ -43,6 +49,10 @@ public class Invoice {
 	 */
 	@Column(name = "total_cost")
 	private double totalCost;
+	
+	@OneToMany(targetEntity=Invoice.class, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	private List<InvoiceDetail> invoiceDetails;
 
 	public int getId() {
 		return id;
@@ -82,6 +92,14 @@ public class Invoice {
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	public List<InvoiceDetail> getInvoiceDetails() {
+		return invoiceDetails;
+	}
+
+	public void setInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
+		this.invoiceDetails = invoiceDetails;
 	}
 	
 }

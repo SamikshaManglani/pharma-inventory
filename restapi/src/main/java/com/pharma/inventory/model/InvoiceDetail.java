@@ -1,10 +1,16 @@
 package com.pharma.inventory.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Cascade;
 
 @XmlRootElement (name="invoice_detail")
 @Entity
@@ -27,14 +33,15 @@ public class InvoiceDetail {
 	/*
 	 * Invoice Id
 	 */
-	@Column(name = "invoice_id")
+	@ManyToOne
+	@JoinColumn(name = "invoice_id")
 	private int invoiceId;
 	
 	/*
 	 * Product Quantity
 	 */
 	@Column(name = "product_quantity")
-	private String productQuantity;
+	private int productQuantity;
 
 	public int getId() {
 		return id;
@@ -60,12 +67,12 @@ public class InvoiceDetail {
 		this.invoiceId = invoiceId;
 	}
 
-	public String getProductQuantity() {
+	public int getProductQuantity() {
 		return productQuantity;
 	}
 
-	public void setProductQuantity(String productQuantity) {
-		this.productQuantity = productQuantity;
+	public void setProductQuantity(int i) {
+		this.productQuantity = i;
 	}
 
 }

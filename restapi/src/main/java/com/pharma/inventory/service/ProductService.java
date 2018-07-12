@@ -8,4 +8,9 @@ import com.pharma.inventory.model.Response;
 public interface ProductService {
 
 	public Response setProductData(List<Product> productList);
+	
+	public Response setProductData(Product product );
+	
+	public List<Product> getTopSoldProducts();
+
 }
