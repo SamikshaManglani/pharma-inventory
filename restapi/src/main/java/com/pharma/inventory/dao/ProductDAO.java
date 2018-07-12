@@ -45,7 +45,7 @@ public class ProductDAO {
 			cr.add(Restrictions.eq("productName", name));
 			List<Product> productList = cr.list();
 			t.commit();
-			if (productList != null && !productList.isEmpty()) {
+			if (productList1 != null && !productList1.isEmpty()) {
 				return productList.get(0);
 			}
 		} catch (HibernateException e) {
