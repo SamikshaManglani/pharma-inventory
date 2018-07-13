@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cascade;
 
 @XmlRootElement (name="invoice")
 @Entity
-@Table(name = "Invoice")
+@Table(name = "invoice")
 public class Invoice {
 
 	/*
@@ -50,8 +50,8 @@ public class Invoice {
 	@Column(name = "total_cost")
 	private double totalCost;
 	
-	@OneToMany(targetEntity=Invoice.class, cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	@Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	@OneToMany(mappedBy = "invoiceId", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	private List<InvoiceDetail> invoiceDetails;
 
 	public int getId() {

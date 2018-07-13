@@ -38,7 +38,7 @@ public class InvoiceDAO {
 				invoiceDetails.add(invoiceDetail);
 			}
 			i.setInvoiceDetails(invoiceDetails);
-			k = (Integer)session.save(i);
+			session.save(i);
 			t.commit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
