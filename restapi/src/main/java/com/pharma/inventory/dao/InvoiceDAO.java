@@ -14,6 +14,7 @@ import com.pharma.inventory.model.Invoice;
 import com.pharma.inventory.model.InvoiceDetail;
 import com.pharma.inventory.model.Order;
 import com.pharma.inventory.model.OrderEntry;
+import com.pharma.inventory.model.Product;
 
 public class InvoiceDAO {
 	
@@ -31,15 +32,28 @@ public class InvoiceDAO {
 			i.setInvoiceDate(new Date());
 			//TODO get id
 			List<InvoiceDetail> invoiceDetails = new ArrayList<InvoiceDetail>();
+			double totalCost =0.0;
 			for(OrderEntry orderEntry : order.getOrderEntries()) {
 				InvoiceDetail invoiceDetail = new InvoiceDetail();
 				invoiceDetail.setProductQuantity(orderEntry.getQuantity());
-				invoiceDetail.setProductId(ProductDAO.getMedicineByName(orderEntry.getName()).getId());
+				Product product = ProductDAO.getMedicineByName(orderEntry.getName());
+				invoiceDetail.setProductId(product.getId());
+				totalCost = totalCost+(product.getPrice()*orderEntry.getQuantity());
 				invoiceDetails.add(invoiceDetail);
 			}
-			i.setInvoiceDetails(invoiceDetails);
+			i.setTotalCost(totalCost);
 			session.save(i);
 			t.commit();
+			k=i.getId();
+			for(InvoiceDetail invoiceDetail: invoiceDetails) {
+				session = getSession();
+				t = session.beginTransaction();
+				if(!t.isActive())
+					t.begin();
+				invoiceDetail.setInvoiceId(k);
+				session.save(invoiceDetail);
+				t.commit();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
