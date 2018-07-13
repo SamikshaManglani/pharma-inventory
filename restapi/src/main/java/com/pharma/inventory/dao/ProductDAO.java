@@ -98,8 +98,8 @@ public class ProductDAO {
 				if (prodList != null && !prodList.isEmpty()) {
 					productList.addAll(prodList);
 				}
-				t.commit();
 			}
+			t.commit();
 			return productList;
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
