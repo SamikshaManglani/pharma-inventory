@@ -16,14 +16,16 @@ import com.pharma.inventory.model.InvoiceDetail;
 import com.pharma.inventory.model.Order;
 import com.pharma.inventory.model.OrderEntry;
 import com.pharma.inventory.model.Product;
+import com.pharma.inventory.model.Response;
 
 public class InvoiceDAO {
 	
-	public static int create(Order order) {
+	public static Response create(Order order) {
 		
 		Session session = getSession();
 		Transaction t = session.beginTransaction();
 		int k=0;
+		Response response = new Response();
 		try {
 			if(!t.isActive())
 				t.begin();
@@ -47,23 +49,26 @@ public class InvoiceDAO {
 			t.commit();
 			k=i.getId();
 			for(InvoiceDetail invoiceDetail: invoiceDetails) {
-				session = getSession();
-				t = session.beginTransaction();
-				if(!t.isActive())
-					t.begin();
 				invoiceDetail.setInvoiceId(k);
-				session.save(invoiceDetail);
-				t.commit();
+				InvoiceDetailDAO.save(invoiceDetail);
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			response.setMessage("Invoice saved successfully. Invoice No.:"+k);
+			response.setStatus(true);
+		}catch (org.hibernate.exception.ConstraintViolationException e) {
+			e.printStackTrace();
+			response.setMessage("Dulicate id cannot be inserted");
+			response.setStatus(false);
+		}
+		catch (Exception e) {
+			response.setMessage(e.getMessage());
+			response.setStatus(true);
 			e.printStackTrace();
 		}
 		finally {
 			//t.rollback();
 			session.close();
 		}
-		return k;
+		return response;
 	}
 
 	public static Invoice getById(int id) throws InvoiceDoesNotExistException {

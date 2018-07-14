@@ -29,10 +29,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 	@POST
 	public Response setInvoice(Order order){
-		int k = InvoiceDAO.create(order);
-		Response response = new Response();
-		response.setStatus(true);
-		response.setMessage("Post works!!" + k);
-		return response;
+		return InvoiceDAO.create(order);
 	}
 }

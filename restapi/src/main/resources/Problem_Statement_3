@@ -1,0 +1,30 @@
+Generate invoice for medicine and generate invoice no.
+
+Request type: POST
+
+URI format : http://localhost:8081/restapi/invoice
+
+JSON:
+
+{
+	"doctorName" : "kohli",
+	"patientName" : "virat",
+	"orderEntries": [
+		{
+			"name" : "lecope",
+			"quantity" : 8
+		},
+		{
+			"name" : "Dispirin",
+			"quantity" : 6
+		},
+		{
+			"name" : "vitC",
+			"quantity" : 3
+		},
+		{
+			"name" : "panD",
+			"quantity" : 1
+		}
+	]
+}
