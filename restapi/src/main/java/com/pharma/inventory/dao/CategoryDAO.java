@@ -27,7 +27,8 @@ public class CategoryDAO {
 				t.begin();
 			session.save(category);
 			t.commit();
-			response.setMessage("Category saved successfully");
+			int k = category.getId();
+			response.setMessage("Category saved successfully. Category id = "+k);
 			response.setStatus(true);
 		}catch (org.hibernate.exception.ConstraintViolationException e) {
 			e.printStackTrace();
