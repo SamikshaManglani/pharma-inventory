@@ -19,13 +19,10 @@ import com.pharma.inventory.model.Product;
 
 public class ProductDAO {
 
-	public static void save(List<Product> productList) throws DataAlreadyExistsException, ProductNameNotExistException {
+	public static void save(List<Product> productList){
 		for (Product product : productList) {
 			Session session = getSession();
 			Transaction t = session.beginTransaction();
-			if(getMedicineByName(product.getProductName()) != null) {
-				throw new DataAlreadyExistsException("Medicine with name = "+product.getProductName()+" already exists");
-			}
 			try {
 				if (!t.isActive())
 					t.begin();
@@ -53,7 +50,7 @@ public class ProductDAO {
 				return productList.get(0);
 			}
 			else {
-				throw new ProductNameNotExistException("Product with name "+name+"does not exist");
+				throw new ProductNameNotExistException("Product with name "+name+" does not exist");
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -113,7 +110,7 @@ public class ProductDAO {
 				return productList;
 			}
 			else {
-				throw new ProductWithCategoryNameNotFoundException("Product with category name "+name+"does not exist");
+				throw new ProductWithCategoryNameNotFoundException("Product with category name "+name+" does not exist");
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
