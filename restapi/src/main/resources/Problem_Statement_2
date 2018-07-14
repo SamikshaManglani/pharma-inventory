@@ -1,0 +1,17 @@
+add/update medicine data
+
+Request type: POST
+
+URI format :  http://localhost:8081/restapi/product
+
+JSON:
+
+{
+		"id" : 1,
+		"manufacturerId" : 2,
+		"productName" : "Crocin",
+		"price" : 38.50,
+		"categoryId" : 15,
+		"expiryDate" : "2019-04-21T18:25:43-05:00",
+		"genericName" : "paracetmol"
+	}

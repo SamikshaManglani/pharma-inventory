@@ -1,0 +1,5 @@
+Get top 10 sold products
+
+Request type: GET
+
+URI format : http://localhost:8081/restapi/product

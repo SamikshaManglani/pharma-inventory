@@ -1,0 +1,27 @@
+Load Medicine Data
+
+Request type: POST
+
+URI format :  http://localhost:8081/restapi/product/list
+
+JSON:
+
+{"product":[
+	{
+		"manufacturerId" : 4,
+		"productName" : "Dolo",
+		"price" : 50,
+		"categoryId" : 5,
+		"expiryDate" : "2019-05-21T18:25:43-05:00",
+		"genericName" : "paracetmol"
+	},
+	{
+		"manufacturerId" : 3,
+		"productName" : "Renocia",
+		"price" : 177,
+		"categoryId" : 1,
+		"expiryDate" : "2020-04-21T18:25:43-05:00",
+		"genericName" : "renocia"
+	}
+]
+}

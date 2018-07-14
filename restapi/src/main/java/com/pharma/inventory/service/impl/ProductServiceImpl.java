@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.pharma.inventory.dao.ProductDAO;
+import com.pharma.inventory.exception.DataAlreadyExistsException;
+import com.pharma.inventory.exception.ProductNameNotExistException;
 import com.pharma.inventory.model.Product;
 import com.pharma.inventory.model.Response;
 import com.pharma.inventory.service.ProductService;
@@ -21,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@POST
 	@Path("/list")
-	public Response setProductData(List<Product> productList) {
+	public Response setProductData(List<Product> productList) throws DataAlreadyExistsException, ProductNameNotExistException {
 		ProductDAO.save(productList);
 		Response response = new Response();
 		response.setMessage("All products Succesfully saved");

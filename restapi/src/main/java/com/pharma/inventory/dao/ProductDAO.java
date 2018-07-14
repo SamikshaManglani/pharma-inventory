@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
+import com.pharma.inventory.exception.DataAlreadyExistsException;
 import com.pharma.inventory.exception.ProductNameNotExistException;
 import com.pharma.inventory.exception.ProductWithCategoryNameNotFoundException;
 import com.pharma.inventory.exception.ProductWithGenericNameDoesNotExist;
@@ -19,20 +19,21 @@ import com.pharma.inventory.model.Product;
 
 public class ProductDAO {
 
-	public static void save(List<Product> productList) {
+	public static void save(List<Product> productList) throws DataAlreadyExistsException, ProductNameNotExistException {
 		for (Product product : productList) {
 			Session session = getSession();
 			Transaction t = session.beginTransaction();
+			if(getMedicineByName(product.getProductName()) != null) {
+				throw new DataAlreadyExistsException("Medicine with name = "+product.getProductName()+" already exists");
+			}
 			try {
 				if (!t.isActive())
 					t.begin();
 				session.save(product);
 				t.commit();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				// t.rollback();
 				session.close();
 			}
 		}
