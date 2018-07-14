@@ -1,0 +1,17 @@
+
+Request type: GET
+
+Search Medicine by name:
+
+URI : http://localhost:8081/restapi/medicineInfo/name/<name>				[replace <name> with medicine name]
+eg: http://localhost:8081/restapi/medicineInfo/name/Crocin
+
+Search Medicine by Generic name:
+
+URI : http://localhost:8081/restapi/medicineInfo/genericName/<GenericName>				[replace <GenericName> with generic name]
+eg: http://localhost:8081/restapi/medicineInfo/genericName/paracetmol
+
+Search Medicine by Category name:
+
+URI : http://localhost:8081/restapi/medicineInfo/categoryName/<CategoryName>				[replace <CategoryName> with Category name]
+eg: http://localhost:8081/restapi/medicineInfo/categoryName/antibiotic

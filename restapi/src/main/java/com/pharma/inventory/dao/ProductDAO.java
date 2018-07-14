@@ -11,6 +11,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
+import com.pharma.inventory.exception.ProductNameNotExistException;
+import com.pharma.inventory.exception.ProductWithCategoryNameNotFoundException;
+import com.pharma.inventory.exception.ProductWithGenericNameDoesNotExist;
 import com.pharma.inventory.model.Category;
 import com.pharma.inventory.model.Product;
 
@@ -35,7 +38,7 @@ public class ProductDAO {
 		}
 	}
 
-	public static Product getMedicineByName(String name) {
+	public static Product getMedicineByName(String name) throws ProductNameNotExistException {
 		Session session = getSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -48,16 +51,19 @@ public class ProductDAO {
 			if (productList != null && !productList.isEmpty()) {
 				return productList.get(0);
 			}
+			else {
+				throw new ProductNameNotExistException("Product with name "+name+"does not exist");
+			}
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			session.close();
 		}
 		return null;
 	}
 
-	public static List<Product> getMedicineByGenericName(String name) {
+	public static List<Product> getMedicineByGenericName(String name) throws ProductWithGenericNameDoesNotExist {
 		Session session = getSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -70,16 +76,18 @@ public class ProductDAO {
 			if (productList != null && !productList.isEmpty()) {
 				return productList;
 			}
+			else {
+				throw new ProductWithGenericNameDoesNotExist("Produt with Generic Name = "+name+" does not exist");
+			}
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 		return null;
 	}
-
-	public static List<Product> getMedicineByCategoryName(String name) {
+	
+	public static List<Product> getMedicineByCategoryName(String name) throws ProductWithCategoryNameNotFoundException {
 		Session session = getSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -100,9 +108,13 @@ public class ProductDAO {
 				}
 			}
 			t.commit();
-			return productList;
+			if(productList != null && !productList.isEmpty()) {
+				return productList;
+			}
+			else {
+				throw new ProductWithCategoryNameNotFoundException("Product with category name "+name+"does not exist");
+			}
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			session.close();
