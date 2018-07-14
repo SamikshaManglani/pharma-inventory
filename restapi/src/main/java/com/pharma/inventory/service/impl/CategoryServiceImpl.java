@@ -18,10 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@POST
 	public Response setCategoryData(Category c) {
-		int k = CategoryDAO.save(c);
-		Response response = new Response();
-		response.setMessage("Category saved "+k);
-		response.setStatus(true);
+		Response response = CategoryDAO.save(c);
 		return response;
 	}
 

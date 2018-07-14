@@ -1,0 +1,10 @@
+To save the categories:
+
+URI format : http://localhost:8081/restapi/category 
+
+JSON format:
+
+{
+	"categoryName" : "BComplex",
+	"categoryDesc" : "vitamin"
+}
