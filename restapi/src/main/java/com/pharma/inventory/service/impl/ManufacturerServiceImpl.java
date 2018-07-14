@@ -18,11 +18,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
 	@POST
 	public Response setManufacturerData(Manufacturer manufacturer) {
-		int k = ManufacturerDAO.save(manufacturer);
-		Response response = new Response();
-		response.setMessage("Manufacturer saved "+k);
-		response.setStatus(true);
-		return response;
+		return ManufacturerDAO.save(manufacturer);
 	}
 
 }

@@ -1,0 +1,11 @@
+Create Manufacturer
+
+Request type :POST
+
+URL format: http://localhost:8081/restapi/manufacturer
+
+JSON:
+{
+	"contact" : "789844989",
+	"address" : "noida"
+}
