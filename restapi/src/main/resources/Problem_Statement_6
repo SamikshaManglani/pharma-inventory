@@ -1,0 +1,6 @@
+Get invoice with id
+
+Request type: GET
+
+URI Format: http://localhost:8081/restapi/invoice/<id>				[replace <id> with the invoice id you want to search]
+eg: http://localhost:8081/restapi/invoice/2

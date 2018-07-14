@@ -1,5 +1,7 @@
 To save the categories:
 
+Request type: POST
+
 URI format : http://localhost:8081/restapi/category 
 
 JSON format:

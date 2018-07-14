@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
+import com.pharma.inventory.exception.InvoiceDoesNotExistException;
 import com.pharma.inventory.model.Invoice;
 import com.pharma.inventory.model.InvoiceDetail;
 import com.pharma.inventory.model.Order;
@@ -65,13 +66,15 @@ public class InvoiceDAO {
 		return k;
 	}
 
-	public static Invoice getById(int id) {
+	public static Invoice getById(int id) throws InvoiceDoesNotExistException {
 		Session session = getSession();
 		Criteria cr =session.createCriteria(Invoice.class);
 		cr.add(Restrictions.idEq(id));
-		if(cr.list().isEmpty())
-			return null;
-		return (Invoice)cr.list().get(0);
+		if(!cr.list().isEmpty() && cr.list() != null)
+			return (Invoice)cr.list().get(0);
+		else {
+			throw new InvoiceDoesNotExistException("Invoice with id = "+id+" doesn't exist");
+		}
 	}
 	
 	public static Session getSession() {
