@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@POST
 	@Path("/list")
-	public Response setProductData(List<Product> productList) throws DataAlreadyExistsException, ProductNameNotExistException {
+	public Response setProductData(List<Product> productList){
 		ProductDAO.save(productList);
 		Response response = new Response();
 		response.setMessage("All products Succesfully saved");
